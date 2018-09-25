@@ -16,8 +16,8 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';;
-import { UserDetailsComponent } from './user-details/user-details.component'
-
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { ProductuploadComponent } from './productupload/productupload.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -30,9 +30,9 @@ import { UserDetailsComponent } from './user-details/user-details.component'
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
-,
-        UserDetailsComponent    ],
+        RegisterComponent,
+        UserDetailsComponent ,
+        ProductuploadComponent   ],
     providers: [
         AuthGuard,
         AlertService,
