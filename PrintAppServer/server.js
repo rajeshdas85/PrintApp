@@ -9,9 +9,19 @@ const  multer = require("multer");
 var fs = require('fs');
 const DIR = './uploads/';
 const upload = multer({dest: DIR});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use(cors());
+
+
+
+app.use(express.static('uploads'));
+
+//Serves all the request which includes /images in the url from Images folder
+app.use('/images', express.static(__dirname + '/images'));
+
 
 // use JWT auth to secure the api
 app.use(jwt());
@@ -24,6 +34,7 @@ app.use('/products', require('./products/product.controller'));
 app.use(errorHandler);
 
 
+//app.use('/images',express.static(path.resolve('/uploads')));
 
 
 // start server
