@@ -1,45 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
-import { ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-const URL = 'http://localhost:4000/api/';
+import { Product } from "src/app/_models";
+import { ProductService } from "src/app/_services/product.service";
+import { first } from "rxjs/internal/operators/first";
+import { AlertService } from "src/app/_services";
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-productupload',
   templateUrl: './productupload.component.html',
   styleUrls: ['./productupload.component.css']
 })
-export class ProductuploadComponent  {
-  //  public uploader:FileUploader = new FileUploader({url: URL});
-  // public hasBaseDropZoneOver:boolean = false;
-  // public hasAnotherDropZoneOver:boolean = false;
- 
-  // public fileOverBase(e:any):void {
-  //   this.hasBaseDropZoneOver = e;
-  // }
- 
-  // public fileOverAnother(e:any):void {
-  //   this.hasAnotherDropZoneOver = e;
-  // }
-constructor(private http: HttpClient){
+export class ProductuploadComponent {
+loading = false;
+  private product: Product = new Product();;
+  imgName:any;
+  imgBase64Data:any;
+  constructor(
+        private productService: ProductService,
+        private router: Router, 
+      
+        private alertService: AlertService) { }
 
-}
- @ViewChild('fileInput') fileInput;
-  
- addFile(): void {
- debugger;
- let fi = this.fileInput.nativeElement;
+  changeListener($event): void {
 
- if (fi.files && fi.files[0]) {
- // let imgURL = 'src/app/assets/images/';
- 
- let fileToUpload = fi.files[0];
- // tslint:disable-next-line:no-unused-expression
- let localpath = "http://localhost:2000/api/Upload/";
- this.http.post(localpath, fileToUpload)
- .subscribe(res => {
- console.log(res);
- });
- }
- }
+    this.readThis($event.target);
+   
+   
+  }
 
+  readThis(inputValue: any): void {
+    debugger;
+    // tslint:disable-next-line:prefer-const
+    var file: File = inputValue.files[0];
+    this.imgName = file.name;
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.imgBase64Data = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  private addProduct() {
+    debugger;
+    this.product.imgBase64Data=this.imgBase64Data;
+    this.product.imgName=this.imgName;
+    this.loading = true;
+    this.productService.addProduct(this.product).pipe(first()).subscribe(
+      data => {
+        this.alertService.success('product added successful', true);
+        this.router.navigate(['/productDetails']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      });
+  }
 }

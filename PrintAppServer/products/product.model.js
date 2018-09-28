@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
     imgName: { type: String, required: true },
-    imgPath: { type: String, required: true },
+    imgBase64Data: { type: String, required: true },
     createdDate: { type: Date, default: Date.now }
 });
 

@@ -16,9 +16,9 @@ export class ProductService {
     //     return this.http.get(`${environment.apiUrl}/users/` + id);
     // }
 
-    // register(user: Product) {
-    //     return this.http.post(`${environment.apiUrl}/users/register`, user);
-    // }
+    addProduct(product: Product) {
+        return this.http.post(`${environment.apiUrl}/products/addProduct`, product);
+    }
 
     // update(user: Product) {
     //     return this.http.put(`${environment.apiUrl}/users/` + user.id, user);

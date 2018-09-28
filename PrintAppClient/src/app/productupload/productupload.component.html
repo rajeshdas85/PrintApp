@@ -1,3 +1,4 @@
-<input #fileInput type="file"/> 
-<img src="../assets/Images/Profile.JPG">
-<button (click)="addFile()">Add</button>
+<input type="file" accept="image/*" (change)="changeListener($event)"> 
+<button type="button" class="btn btn-success btn-s" (click)="addProduct()">
+    Add Image
+</button>

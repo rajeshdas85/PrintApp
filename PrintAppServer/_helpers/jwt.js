@@ -11,9 +11,11 @@ function jwt() {
             // public routes that don't require authentication
             '/users/authenticate',
             '/users/register',
+            //,
             //Need to Remove While authenticating as i have add temporarily 
             '/products/addProduct',
             '/products/'
+            //'/upload'
           
         ]
     });
