@@ -5,6 +5,7 @@ const productService = require('./product.service');
 router.post('/addProduct', addProduct);
 router.get('/', getAllProducts);
 router.delete('/:id', deleteProduct);
+router.get('/:id', getProductById);
 module.exports = router;
 
 function addProduct(req, res, next) {
@@ -25,3 +26,8 @@ function deleteProduct(req, res, next) {
         .catch(err => next(err));
 }
 
+function getProductById(req, res, next) {
+    productService.getProductById(req.params.id)
+        .then(product => product ? res.json(product) : res.sendStatus(404))
+        .catch(err => next(err));
+}

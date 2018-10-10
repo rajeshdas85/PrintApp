@@ -14,7 +14,8 @@ function jwt() {
             //,
             //Need to Remove While authenticating as i have add temporarily 
             '/products/addProduct',
-            '/products/'
+            '/products/',
+            '/products/getProductById'
             //'/upload'
           
         ]

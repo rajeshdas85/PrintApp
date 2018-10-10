@@ -7,7 +7,8 @@ const Product = db.Product;
 module.exports = {
     addProduct,
     getAllProducts,
-    deleteProduct
+    deleteProduct,
+    getProductById
 };
 
 async function addProduct(productParam) {
@@ -22,4 +23,8 @@ async function getAllProducts() {
 
 async function deleteProduct(id) {
     await Product.findByIdAndRemove(id);
+}
+
+async function getProductById(id) {
+    return await Product.findById(id);
 }
